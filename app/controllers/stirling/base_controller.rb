@@ -1,7 +1,7 @@
 class Stirling::BaseController < ApplicationController
-  before_filter :build_instance, only: %i(new, create)
-  before_filter :set_instance, only: %i(show, destroy, edit, update)
-  before_filter :assign_params, only: %i(update)
+  before_filter :build_instance, only: [:new, :create]
+  before_filter :set_instance, only: [:show, :destroy, :edit, :update]
+  before_filter :assign_params, only: [:update]
 
   def index; end
   def show; end
