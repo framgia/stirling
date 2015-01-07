@@ -1,4 +1,4 @@
-Rails.application.configure do
+Dummy::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
@@ -13,7 +13,11 @@ Rails.application.configure do
   config.eager_load = false
 
   # Configure static asset server for tests with Cache-Control for performance.
-  config.serve_static_assets  = true
+  if Rails.version >= "4.2.0"
+    config.serve_static_files = true
+  else
+    config.serve_static_assets = true
+  end
   config.static_cache_control = 'public, max-age=3600'
 
   # Show full error reports and disable caching.
