@@ -7,14 +7,14 @@ require "stirling/version"
 Gem::Specification.new do |s|
   s.name        = "stirling"
   s.version     = Stirling::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Stirling."
-  s.description = "TODO: Description of Stirling."
+  s.authors     = ["Framgia"]
+  s.email       = ["oss@framgia.com"]
+  s.homepage    = "https://github.com/framgia/stirling"
+  s.summary     = "Rails extension tool"
+  s.description = "Rails extension tool"
   s.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   s.add_development_dependency "rspec-rails"
   s.add_development_dependency "sqlite3"
