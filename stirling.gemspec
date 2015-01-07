@@ -13,9 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Rails extension tool"
   s.description = "Rails extension tool"
   s.license     = "MIT"
+  s.required_ruby_version = ">= 1.9.3"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
-
-  s.add_development_dependency "rspec-rails"
-  s.add_development_dependency "sqlite3"
 end
