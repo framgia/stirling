@@ -1,5 +1,4 @@
 language: ruby
-script: bundle exec rake spec
 rvm:
   - 1.9.3
   - 2.0.0
@@ -9,3 +8,5 @@ gemfile:
   - gemfiles/Gemfile-rails-4.0
   - gemfiles/Gemfile-rails-4.1
   - gemfiles/Gemfile-rails-4.2
+before_script: bundle update
+script: bundle exec rspec
