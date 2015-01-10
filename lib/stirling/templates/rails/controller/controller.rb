@@ -3,7 +3,7 @@ require_dependency "<%= namespaced_path %>/application_controller"
 
 <% end -%>
 <% module_namespacing do -%>
-class <%= class_name %>Controller < Stirling::BaseControlle
+class <%= class_name %>Controller < Stirling::BaseController
 <% actions.each do |action| -%>
   def <%= action %>
   end

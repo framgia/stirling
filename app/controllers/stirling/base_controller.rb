@@ -1,6 +1,7 @@
 class Stirling::BaseController < ApplicationController
   before_filter :build_instance, only: [:new, :create]
   before_filter :set_instance, only: [:show, :destroy, :edit, :update]
+  before_filter :set_instances, only: [:index]
   before_filter :assign_params, only: [:update]
 
   def index; end
@@ -12,12 +13,27 @@ class Stirling::BaseController < ApplicationController
   def destroy; end
 
   private
+  def set_instances
+    instances = if Stirling::Gem.load? "ransack"
+      @q = model.search params[:q]
+      @q.result
+    else
+      model.all
+    end
+
+    if Stirling::Gem.load? "kaminari" || Stirling::Gem.load? "will_paginate"
+      instances = instances.page params[:page]
+    end
+
+    instance_variable_set "@#{model_name.pluralize}", instances
+  end
+
   def set_instance
-    instance = model.find params[:id]
+    self.instance = model.find params[:id]
   end
 
   def build_instance
-    instance = model.new model_params
+    self.instance = model.new model_params
   end
 
   def instance
