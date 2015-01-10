@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stirling (0.0.2)
+    stirling (0.0.3)
       eager_decorator
 
 GEM
