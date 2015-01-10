@@ -21,7 +21,7 @@ class Stirling::BaseController < ApplicationController
       model.all
     end
 
-    if Stirling::Gem.load? "kaminari" || Stirling::Gem.load? "will_paginate"
+    if Stirling::Gem.load?("kaminari") || Stirling::Gem.load?("will_paginate")
       instances = instances.page params[:page]
     end
 

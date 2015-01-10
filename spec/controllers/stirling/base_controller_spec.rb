@@ -126,4 +126,54 @@ RSpec.describe Stirling::BaseController, :type => :controller do
       it {is_expected.to eq params}
     end
   end
+
+  describe "#set_instances" do
+    subject {controller.send :set_instances}
+
+    context "when app includes ransack" do
+      let(:ransack){double "ransack", :result => nil}
+
+      before do
+        controller.send(:model).class_eval {def self.search(q); end}
+        expect(Stirling::Gem).to receive("load?").with("ransack")
+          .and_return true
+        expect(Stirling::Gem).to receive("load?").with("kaminari")
+          .and_return false
+        expect(Stirling::Gem).to receive("load?").with("will_paginate")
+          .and_return false
+        expect(controller.send(:model)).to receive(:search).and_return ransack
+        expect(ransack).to receive(:result).and_return ransack
+      end
+
+      it {is_expected.to eq ransack}
+    end
+
+    context "when app does not include ransack" do
+      before do
+        expect(Stirling::Gem).to receive("load?").with("ransack")
+          .and_return false
+        expect(Stirling::Gem).to receive("load?").with("kaminari")
+          .and_return false
+        expect(Stirling::Gem).to receive("load?").with("will_paginate")
+          .and_return false
+        expect(controller.send(:model)).to receive(:all).and_return instance
+      end
+
+      it {is_expected.to eq instance}
+    end
+
+    context "when app includes paginate" do
+      before do
+        controller.send(:model).class_eval {def self.page(page); end}
+        expect(Stirling::Gem).to receive("load?").with("ransack")
+          .and_return false
+        expect(Stirling::Gem).to receive("load?").with("kaminari")
+          .and_return true
+        expect(controller.send(:model)).to receive(:all).and_return instance
+        expect(instance).to receive(:page).and_return instance
+      end
+
+      it {is_expected.to eq instance}
+    end
+  end
 end
