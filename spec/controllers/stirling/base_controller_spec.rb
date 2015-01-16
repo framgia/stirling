@@ -35,8 +35,8 @@ RSpec.describe Stirling::BaseController, :type => :controller do
     it {is_expected.to eq :"#{model_name}"}
   end
 
-  describe "#set_instance" do
-    subject {controller.send :set_instance}
+  describe "#load_instance" do
+    subject {controller.send :load_instance}
 
     before do
       expect(controller.send(:model)).to receive(:find).and_return instance
@@ -127,8 +127,8 @@ RSpec.describe Stirling::BaseController, :type => :controller do
     end
   end
 
-  describe "#set_instances" do
-    subject {controller.send :set_instances}
+  describe "#load_instances" do
+    subject {controller.send :load_instances}
 
     context "when app includes ransack" do
       let(:ransack){double "ransack", :result => nil}

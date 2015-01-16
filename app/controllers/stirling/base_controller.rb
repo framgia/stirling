@@ -1,7 +1,7 @@
 class Stirling::BaseController < ApplicationController
   before_filter :build_instance, only: [:new, :create]
-  before_filter :set_instance, only: [:show, :destroy, :edit, :update]
-  before_filter :set_instances, only: [:index]
+  before_filter :load_instance, only: [:show, :destroy, :edit, :update]
+  before_filter :load_instances, only: [:index]
   before_filter :assign_params, only: [:update]
 
   def index; end
@@ -13,7 +13,7 @@ class Stirling::BaseController < ApplicationController
   def destroy; end
 
   private
-  def set_instances
+  def load_instances
     instances = if Stirling::Gem.load? "ransack"
       @q = model.search params[:q]
       @q.result
@@ -28,7 +28,7 @@ class Stirling::BaseController < ApplicationController
     instance_variable_set "@#{model_name.pluralize}", instances
   end
 
-  def set_instance
+  def load_instance
     self.instance = model.find params[:id]
   end
 
